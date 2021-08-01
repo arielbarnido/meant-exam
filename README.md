@@ -8,6 +8,6 @@ Application can be run via maven on the delivery root folder. See command below:
 Example api call:
 http://localhost:9081/api/delivery/cost?weight=5&length=1&width=10&height=23&voucherCode=MYNT
 
-<i>Note: I utilize lombok to lessen bopilerplate codes. In case you needed to view the code via an IDE you might need to install the lombok plugin.</i>
+<i>Note: I utilize lombok to lessen boilerplate codes. In case you need to view the code via an IDE you might need to install the lombok plugin.</i>
 Reference: https://www.baeldung.com/lombok-ide
 
