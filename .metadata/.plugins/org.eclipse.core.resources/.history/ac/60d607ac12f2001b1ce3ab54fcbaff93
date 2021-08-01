@@ -1,0 +1,26 @@
+package com.meant.deliver.endpoint;
+
+import java.math.BigDecimal;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+//@RestController
+//@RequestMapping("api/delivery")
+@Component
+@Path("api/delivery")
+public class DeliveryCostEndpoint {
+
+//	@GetMapping("/cost")
+	@GET
+	public BigDecimal getDeliveryCost(final DeliveryCostDto deliveryCostDto){
+		return null;
+	}
+}

@@ -1,0 +1,48 @@
+package com.meant.delivery.param.validator;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.math.BigDecimal;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import javax.validation.Constraint;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import javax.validation.Payload;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = {ParamCombinationChecker.Validator.class})
+public @interface ParamCombinationChecker {
+	String message()
+	default "Fruit serial number is not valid";
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+    
+    
+    class Validator implements ConstraintValidator<ParamCombinationChecker, DeliveryCostDto>{
+
+    	@Override
+    	public boolean isValid(DeliveryCostDto arg0, ConstraintValidatorContext arg1) {
+    		System.out.println("Checking here okay??");
+    		if(arg0.getWeight() != null){
+    			return true;
+    		}else{
+    			System.out.println("BEFORE checking:" + arg0.getHeight());
+    			System.out.println("BEFORE checking:" + arg0.getLength());
+    			System.out.println("BEFORE checking:" + arg0.getWidth());
+    			boolean vv = Stream.of(arg0.getHeight(), arg0.getLength(), arg0.getWidth()).filter((val) -> val == null).findAny().isPresent();
+    			System.out.println("VV:" + (vv));
+    			return !vv;
+    			
+    		}
+    		//return false;
+    	}
+
+    }
+}
+
+

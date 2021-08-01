@@ -1,0 +1,16 @@
+package com.meant.delivery.param.validator;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+public class Validator implements ConstraintValidator<ParamCombinationChecker, DeliveryCostDto>{
+
+	@Override
+	public boolean isValid(DeliveryCostDto arg0, ConstraintValidatorContext arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

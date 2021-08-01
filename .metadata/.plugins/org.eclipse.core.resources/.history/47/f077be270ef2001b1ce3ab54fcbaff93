@@ -1,0 +1,5 @@
+package com.meant.delivery.dto;
+
+public class DeliveryCostDto {
+
+}

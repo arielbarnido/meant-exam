@@ -1,0 +1,9 @@
+package com.meant.delivery.param.validator;
+
+import javax.validation.ConstraintValidator;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+public class Validator implements ConstraintValidator<ParamCombinationChecker, DeliveryCostDto>{
+
+}

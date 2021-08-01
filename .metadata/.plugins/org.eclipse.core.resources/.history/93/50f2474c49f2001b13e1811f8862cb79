@@ -1,0 +1,9 @@
+package com.meant.delivery.dto;
+
+public enum DeliveryCostComputationRule {
+    REJECT(),
+    HEAVY(),
+    MALL(),
+    MEDIUM(),
+    DEFAULT()
+}

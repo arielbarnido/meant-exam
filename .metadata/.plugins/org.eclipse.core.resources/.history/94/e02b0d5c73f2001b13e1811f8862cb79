@@ -1,0 +1,39 @@
+package com.meant.delivery.param.validator;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import javax.validation.Constraint;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import javax.validation.Payload;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = { ParamCombinationChecker.Validator.class })
+public @interface ParamCombinationChecker {
+    String message() default "Fruit serial number is not valid";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
+    class Validator implements ConstraintValidator<ParamCombinationChecker, DeliveryCostDto> {
+
+	@Override
+	public boolean isValid(DeliveryCostDto arg0, ConstraintValidatorContext arg1) {
+	    if (arg0.getWeight() == null) {
+		return false;
+	    } else {
+		// boolean inValid = Stream.of(arg0.getHeight(),
+		// arg0.getLength()).filter((val) -> null ==
+		// val).findAny().isPresent();
+		boolean inValid = arg0.getHeight() == null || arg0.getLength() == null || arg0.getWidth() == null;
+		return !inValid;
+		//
+	    }
+	}
+
+    }
+}

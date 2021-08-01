@@ -1,0 +1,24 @@
+package com.meant.delivery.service;
+
+import java.math.BigDecimal;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.meant.delivery.dto.DeliveryCostDto;
+import com.meant.delivery.exception.InvalidVoucherException;
+
+public class DeliveryCostServiceTest {
+
+    @InjectMocks
+    DeliveryCostService service;
+
+    @Test
+    public void testCalculateWithMoreThan50kg()
+	    throws JsonMappingException, JsonProcessingException, InvalidVoucherException {
+	service.calculateParcelCost(DeliveryCostDto.builder().weight(new BigDecimal(51)).height(new BigDecimal(1))
+		.width(new BigDecimal(2)).length(new BigDecimal(3)).build());
+    }
+}

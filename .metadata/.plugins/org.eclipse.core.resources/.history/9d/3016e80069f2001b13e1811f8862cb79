@@ -1,0 +1,10 @@
+package com.meant.delivery.exception;
+
+import com.meant.delivery.service.CannotCategorizeparcelException;
+
+public class CannotCategorizeparcelException extends Exception {
+
+    public CannotCategorizeparcelException(String message){
+	super(message);
+    }
+}

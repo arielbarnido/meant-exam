@@ -1,0 +1,5 @@
+package com.meant.delivery.config;
+
+public class AppConfig {
+
+}

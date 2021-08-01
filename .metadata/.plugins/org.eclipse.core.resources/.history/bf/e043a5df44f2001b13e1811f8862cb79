@@ -1,0 +1,6 @@
+package com.meant.delivery.exception;
+
+public class InvalidVoucherException extends Exception {
+
+	
+}

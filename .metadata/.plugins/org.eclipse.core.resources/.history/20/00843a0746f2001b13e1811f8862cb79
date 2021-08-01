@@ -1,0 +1,15 @@
+package com.meant.delivery.service;
+
+import org.springframework.stereotype.Service;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+@Service
+public class DeliveryCostService {
+
+    public void calculateParcelCost(DeliveryCostDto dto) {
+	// TODO Auto-generated method stub
+	
+    }
+
+}

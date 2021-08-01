@@ -1,0 +1,60 @@
+package com.meant.delivery.service;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+import java.math.BigDecimal;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.meant.delivery.dto.DeliveryCostDto;
+import com.meant.delivery.exception.InvalidVoucherException;
+
+@SpringBootTest
+public class DeliveryCostServiceTest {
+
+    @InjectMocks
+    DeliveryCostService service;
+
+    @BeforeEach
+    public void setup() {
+
+    }
+
+    @Test
+    public void testCalculateWithMoreThan50kg()
+	    throws JsonMappingException, JsonProcessingException, InvalidVoucherException {
+	BigDecimal computedCost = service.calculateParcelCost(DeliveryCostDto.builder().weight(new BigDecimal(51))
+		.height(new BigDecimal(1)).width(new BigDecimal(2)).length(new BigDecimal(3)).build());
+	assertThat(computedCost, equalTo(new BigDecimal(-51)));
+    }
+
+    @Test
+    public void testCalculateHeavyParcel()
+	    throws JsonMappingException, JsonProcessingException, InvalidVoucherException {
+	BigDecimal computedCost = service.calculateParcelCost(DeliveryCostDto.builder().weight(new BigDecimal(11))
+		.height(new BigDecimal(1)).width(new BigDecimal(2)).length(new BigDecimal(3)).build());
+	assertThat(computedCost, equalTo(new BigDecimal(220)));
+    }
+
+    @Test
+    public void testCalculateSmallParcel()
+	    throws JsonMappingException, JsonProcessingException, InvalidVoucherException {
+	BigDecimal computedCost = service.calculateParcelCost(DeliveryCostDto.builder().weight(new BigDecimal(11))
+		.height(new BigDecimal(1)).width(new BigDecimal(2)).length(new BigDecimal(3)).build());
+	assertThat(computedCost, equalTo(new BigDecimal(0.18)));
+    }
+
+    @Test
+    public void testCalculateMediumParcel()
+	    throws JsonMappingException, JsonProcessingException, InvalidVoucherException {
+	BigDecimal computedCost = service.calculateParcelCost(DeliveryCostDto.builder().weight(new BigDecimal(11))
+		.height(new BigDecimal(10)).width(new BigDecimal(10)).length(new BigDecimal(23)).build());
+	assertThat(computedCost, equalTo(new BigDecimal(92)));
+    }
+}

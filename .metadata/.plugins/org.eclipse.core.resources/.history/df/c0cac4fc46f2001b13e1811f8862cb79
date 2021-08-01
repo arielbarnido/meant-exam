@@ -1,0 +1,16 @@
+package com.meant.delivery.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.stereotype.Service;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+@Service
+public class DeliveryCostService {
+
+    public void calculateParcelCost(DeliveryCostDto dto) {
+	BigDecimal discountPercentage = new BigDecimal(1.00);
+    }
+
+}

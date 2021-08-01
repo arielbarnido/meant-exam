@@ -1,0 +1,30 @@
+package com.meant.delivery.dto;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public enum DeliveryCostComputationRule {
+
+    REJECT(input -> input.compareTo(new BigDecimal(50)) == 1, (input) -> input.multiply(new BigDecimal(-1))), //
+    HEAVY(input -> input.compareTo(new BigDecimal(10)) == 1, (input) -> input.multiply(new BigDecimal(20))), //
+    MALL(input -> input.compareTo(new BigDecimal(1500)) == -1, (input) -> input.multiply(new BigDecimal(.03))), //
+    MEDIUM(input -> input.compareTo(new BigDecimal(2500)) == -1, (input) -> input.multiply(new BigDecimal(.04))), //
+    DEFAULT((input) -> true, (input) -> input.multiply(new BigDecimal(.05)));
+
+    Predicate<BigDecimal> ruleCondition;
+    Function<BigDecimal, BigDecimal> calculator;
+
+    DeliveryCostComputationRule(Predicate<BigDecimal> ruleCondition, Function<BigDecimal, BigDecimal> calculator) {
+	this.ruleCondition = ruleCondition;
+	this.calculator = calculator;
+    }
+
+    List<DeliveryCostComputationRule> getRules() {
+	return Stream.of(DeliveryCostComputationRule.values()).collect(Collectors.toList());
+    }
+
+}

@@ -1,0 +1,15 @@
+package com.meant.delivery.service;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+
+public class DeliveryCostServiceTest {
+
+    @InjectMocks
+    DeliveryCostService service; 
+    @Test
+    public void testCalculateWithMoreThan50kg(){
+	
+    }
+}
+

@@ -1,0 +1,28 @@
+package com.meant.delivery.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.meant.delivery.dto.Discount;
+
+@Service
+public class Discountservice {
+	@Autowired
+	RestTemplate restTemplate;
+	
+	private static final String BASE_URL = "https://mynt-exam.mocklab.io/";
+	
+	public BigDecimal getDiscountPercentageUsingViaVoucher(String voucherCode){
+		ResponseEntity<String> response = restTemplate.getForEntity(BASE_URL + "voucher/" + voucherCode + buildQueryParams(), String.class);
+		
+		return BigDecimal.ONE;
+	}
+
+	private String buildQueryParams() {
+		return "?key=apikey";
+	}
+
+}

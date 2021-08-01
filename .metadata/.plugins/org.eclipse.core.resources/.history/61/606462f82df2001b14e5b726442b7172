@@ -1,0 +1,5 @@
+package com.meant.delivery.param.validator;
+
+public class Validator {
+
+}

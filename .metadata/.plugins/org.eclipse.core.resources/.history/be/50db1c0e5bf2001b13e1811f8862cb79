@@ -1,0 +1,41 @@
+package com.meant.delivery.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.meant.delivery.dto.DeliveryCostComputationRule;
+import com.meant.delivery.dto.DeliveryCostDto;
+import com.meant.delivery.exception.InvalidVoucherException;
+
+@Service
+public class DeliveryCostService {
+
+    @Autowired
+    Discountservice discountservice;
+
+    public void calculateParcelCost(DeliveryCostDto dto)
+	    throws JsonMappingException, JsonProcessingException, InvalidVoucherException {
+	/*
+	 * BigDecimal discountPercentage = new BigDecimal(
+	 * discountservice.getDiscountPercentageUsingViaVoucher(dto.
+	 * getVoucherCode()));
+	 */
+	BigDecimal finalCost = BigDecimal.ZERO;
+	boolean isRuleToRun = false;
+	for (DeliveryCostComputationRule rule : DeliveryCostComputationRule.getRules()) {
+	    System.out.print("Running rule condition >>> ");
+	    System.out.println(rule.name());
+	    isRuleToRun = rule.getRuleCondition().test(rule.getGetterFunction());
+	    if (isRuleToRun) {
+		
+	    }
+
+	}
+
+    }
+
+}

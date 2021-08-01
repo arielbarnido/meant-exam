@@ -1,0 +1,15 @@
+package com.meant.delivery.dto;
+
+import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class DeliveryCostResponseDto {
+    
+    @JsonProperty("category")
+    private String category;
+    
+    @JsonProperty("cost")
+    private BigDecimal cost;
+
+}

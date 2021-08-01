@@ -1,0 +1,18 @@
+package com.meant.delivery.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.meant.delivery.dto.DeliveryCostDto;
+
+@Service
+public class DeliveryCostService {
+
+    @Autowired Discountservice discountservice;
+    public void calculateParcelCost(DeliveryCostDto dto) {
+	BigDecimal discountPercentage = new BigDecimal(discountservice.getDiscountPercentageUsingViaVoucher(dto.getVoucherCode()));
+    }
+
+}

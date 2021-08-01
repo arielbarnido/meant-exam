@@ -1,0 +1,13 @@
+package com.meant.delivery.dto;
+
+import java.math.BigDecimal;
+
+public enum DeliveryCostComputationRule {
+
+    REJECT(input -> input > 50);
+    // , HEAVY(), MALL(), MEDIUM(), DEFAULT()
+
+    DeliveryCostComputationRule(BigDecimal input) {
+
+    }
+}

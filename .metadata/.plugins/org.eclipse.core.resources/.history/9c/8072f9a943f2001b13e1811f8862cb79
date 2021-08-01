@@ -1,0 +1,44 @@
+package com.meant.delivery.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meant.delivery.dto.Discount;
+
+@Service
+public class Discountservice {
+	@Autowired
+	RestTemplate restTemplate;
+	
+	@Autowired
+	ObjectMapper objectMapper;
+	
+	private static final String BASE_URL = "https://mynt-exam.mocklab.io/";
+	
+	public BigDecimal getDiscountPercentageUsingViaVoucher(String voucherCode){
+		ResponseEntity<String> response = restTemplate.getForEntity(BASE_URL + "voucher/" + voucherCode + buildQueryParams(), String.class);
+		if(response.getStatusCode() == HttpStatus.OK){
+			BigDecimal discountPercentage = extractValue(response);
+		}
+		
+		
+		return BigDecimal.ONE;
+	}
+
+	private BigDecimal extractValue(ResponseEntity<String> response) {
+		JsonNode root = objectMapper.readTree(response.getBody());
+		return null;
+	}
+
+	private String buildQueryParams() {
+		return "?key=apikey";
+	}
+ 
+}

@@ -1,0 +1,14 @@
+package com.meant.delivery.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class Discountservice {
+	
+	public BigDecimal getDiscountPercentageUsingViaVoucher(string voucherCode){
+		
+	}
+
+}

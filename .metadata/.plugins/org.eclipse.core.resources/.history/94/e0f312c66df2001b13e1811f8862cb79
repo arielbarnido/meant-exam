@@ -1,0 +1,47 @@
+package com.meant.delivery.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meant.delivery.exception.InvalidVoucherException;
+
+@Service
+public class Discountservice {
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    private static final String BASE_URL = "https://mynt-exam.mocklab.io/";
+
+    public Double getDiscountPercentageUsingViaVoucher(String voucherCode)
+	    throws JsonMappingException, JsonProcessingException, InvalidVoucherException {
+
+	ResponseEntity<String> response = restTemplate
+		.getForEntity(BASE_URL + "voucher/" + voucherCode + buildQueryParams(), String.class);
+	if (response.getStatusCode() == HttpStatus.OK) {
+	    return extractValue(response);
+	}
+	throw new InvalidVoucherException("Invalid Voucher");
+    }
+
+    private Double extractValue(ResponseEntity<String> response) throws JsonMappingException, JsonProcessingException {
+	JsonNode root = objectMapper.readTree(response.getBody());
+	JsonNode discount = root.path("discount");
+	discount.asText();
+	return discount.asDouble();
+    }
+
+    private String buildQueryParams() {
+	return "?key=apikey";
+    }
+
+}

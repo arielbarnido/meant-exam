@@ -1,0 +1,11 @@
+package com.meant.delivery.dto;
+
+public enum DeliveryCostComputationRule {
+    
+    REJECT(input -> input > 50)
+    //, HEAVY(), MALL(), MEDIUM(), DEFAULT()
+    
+    DeliveryCostComputationRule(String input){
+	
+    }
+}
